@@ -10,12 +10,17 @@ from plotly.subplots import make_subplots
 from stock import Stock
 import numpy as np
 import pickle
+from PIL import Image
 
 st.set_page_config(
     page_title="PIP Consultant", layout='centered'
 )
 
-st.markdown("<h1 style='text-align: center; color: black;'>Apple Stock Sentiment Analysis</h1>", unsafe_allow_html=True)
+image = Image.open('./PIP_consultant.png')
+window1 = st.sidebar.container()
+window1.image(image)
+
+st.markdown("<h3 style='text-align: center; color: black;'>Apple Stock Sentiment Analysis</h3>", unsafe_allow_html=True)
 
 # ------ layout setting---------------------------
 window_selection_c = st.sidebar.container() # create an empty container in the sidebar
@@ -78,9 +83,10 @@ with tab1:
     close_price = df['Close'].tail(1).values
     low_price = df['Low'].tail(1).values
     date_now = pd.to_datetime(df['datetime']).dt.strftime('%Y-%m-%d').tail(1).values
+    adj_close_price = df['Adj Close'].tail(1).values
     
     df_predict = pd.DataFrame({'Open': [open_price], 'High': [high_price], 
-                        'Low': [low_price], 'Close': [close_price], 
+                        'Low': [low_price], 'Close': [close_price], 'Adj Close': [adj_close_price],
                         'Volume': [volume_shares], 'pos': [positive_sentiment], 
                         'neg': [negative_sentiment], 'neutral': [neutral_sentiment]}, index=date_now)
 
