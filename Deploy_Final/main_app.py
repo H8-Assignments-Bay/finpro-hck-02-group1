@@ -12,6 +12,7 @@ import numpy as np
 import pickle
 from PIL import Image
 
+
 st.set_page_config(
     page_title="PIP Consultant", layout='centered'
 )
@@ -20,7 +21,7 @@ image = Image.open('./PIP_consultant.png')
 window1 = st.sidebar.container()
 window1.image(image)
 
-st.markdown("<h3 style='text-align: center; color: black;'>Apple Stock Sentiment Analysis</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: black;'>Apple Stock Analysis</h3>", unsafe_allow_html=True)
 
 # ------ layout setting---------------------------
 window_selection_c = st.sidebar.container() # create an empty container in the sidebar
@@ -45,7 +46,7 @@ SYMB = window_selection_c.selectbox("select stock", STOCKS)
 
 stock = Stock(symbol=SYMB)
 df = stock.load_data(START, END, inplace=True)
-fig = make_subplots(rows=2, cols=1, shared_xaxes=True, row_width=[0.3, 0.7])
+fig = make_subplots(rows=2, cols=1, shared_xaxes=True, row_width=[0.3, 1])
 
 option = st.sidebar.radio('Option', ['Stock Return', 'Close Price', 'Shares Traded'])
 
@@ -63,6 +64,7 @@ if option=='Shares Traded':
         
     stock.plot_raw_data_3(fig)
     st.plotly_chart(fig)
+
 
 tab1, tab2 = st.tabs(["Forecast With Twitter Sentiment", "Forcast Without Twitter Sentiment"])
 
@@ -86,17 +88,16 @@ with tab1:
     adj_close_price = df['Adj Close'].tail(1).values
     
     df_predict = pd.DataFrame({'Open': [open_price], 'High': [high_price], 
-                        'Low': [low_price], 'Close': [close_price], 'Adj Close': [adj_close_price],
+                        'Low': [low_price], 'Close': [close_price],
                         'Volume': [volume_shares], 'pos': [positive_sentiment], 
                         'neg': [negative_sentiment], 'neutral': [neutral_sentiment]}, index=date_now)
 
     submit_2 = st.button('Predict')
     if submit_2:
-        model_linreg = pickle.load(open('./preprocess.pkl', 'rb'))
-        pred = float(np.round(model_linreg.predict(df_predict), 3))
-        
         st.write("Today")
         st.write(df_predict)
+        model_linreg = pickle.load(open('./preprocess.pkl', 'rb'))
+        pred = float(np.round(model_linreg.predict(df_predict), 3))
         
         st.write(f"Tomorrow Close Price $ {pred}")
 

@@ -73,9 +73,9 @@ class Stock:
         temp = dict(layout=go.Layout(font=dict(family="Franklin Gothic", size=12)))
             
                 
-        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg), row=1, col=1)
+        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg, showlegend=False), row=1, col=1)
         fig.add_trace(go.Scatter(x=df_date, y=MA_50, marker_color='grey', name='MA50', showlegend=True), row=1, col=1)
-        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightgrey', name='MA200', showlegend=True), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightblue', name='MA200', showlegend=True), row=1, col=1)
         fig.add_trace(go.Scatter(x=df_date, y=returns, mode='lines', name='Return', showlegend=False, marker_color=colors[3]), row=2, col=1)
                 
         fig.update_xaxes(rangeslider_visible=False,
@@ -89,7 +89,7 @@ class Stock:
                                 dict(step="all")]), y=1, x=.01), row=1,col=1)
                 
         fig.update_layout(template=temp, title='Apple Stock', hovermode='x unified', 
-                            yaxis1=dict(title='Stock Price', ticksuffix=' USD'), yaxis2=dict(title='Stock Return',ticksuffix='%')
+                            yaxis1=dict(title='Stock Price'), yaxis2=dict(title='Stock Return',ticksuffix='%')
                         )
         return fig
 
@@ -107,9 +107,9 @@ class Stock:
         temp = dict(layout=go.Layout(font=dict(family="Franklin Gothic", size=12)))
             
                 
-        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg), row=1, col=1)
+        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg, showlegend=False), row=1, col=1)
         fig.add_trace(go.Scatter(x=df_date, y=MA_50, marker_color='grey', name='MA50', showlegend=True), row=1, col=1)
-        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightgrey', name='MA200', showlegend=True), row=1, col=1)
+        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightblue', name='MA200', showlegend=True), row=1, col=1)
         fig.add_trace(go.Scatter(x=df_date, y=close_avg, mode='lines', name='Close', showlegend=False, marker_color=colors[4]), row=2, col=1)    
         fig.update_xaxes(rangeslider_visible=False,
                         rangeselector=dict(
@@ -122,7 +122,7 @@ class Stock:
                                 dict(step="all")]), y=1, x=.01), row=1,col=1)
                 
         fig.update_layout(template=temp, title='Apple Stock', hovermode='x unified', 
-                            yaxis1=dict(title='Stock Price', ticksuffix=' USD'), yaxis2_title='Closing Price'
+                            yaxis1=dict(title='Stock Price'), yaxis2_title='Closing Price'
                         )
         return fig
 
@@ -141,9 +141,9 @@ class Stock:
         temp = dict(layout=go.Layout(font=dict(family="Franklin Gothic", size=12)))
                 
                     
-        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg), row=1, col=1)
+        fig.add_trace(go.Candlestick(x=df_date, open=open_avg, high=high_avg, low=low_avg, close=close_avg, showlegend=False), row=1, col=1)
         fig.add_trace(go.Scatter(x=df_date, y=MA_50, marker_color='grey', name='MA50', showlegend=True), row=1, col=1)
-        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightgrey', name='MA200', showlegend=True), row=1, col=1)        
+        fig.add_trace(go.Scatter(x=df_date, y=MA_200, marker_color='lightblue', name='MA200', showlegend=True), row=1, col=1)        
         fig.add_trace(go.Scatter(x=df_date, y=vol_avg, mode='lines', name='Volume', showlegend=False, marker_color=colors[5]), row=2, col=1)
                 
         fig.update_xaxes(rangeslider_visible=False,
@@ -157,7 +157,7 @@ class Stock:
                                 dict(step="all")]), y=1, x=.01), row=1,col=1)
                     
         fig.update_layout(template=temp, title='Apple Stock', hovermode='x unified', 
-                                yaxis1=dict(title='Stock Price', ticksuffix=' USD'), yaxis2_title='Shares Traded'
+                                yaxis1=dict(title='Stock Price'), yaxis2_title='Shares Traded'
                             )
         return fig        
     
