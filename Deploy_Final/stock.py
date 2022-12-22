@@ -38,7 +38,7 @@ class Stock:
         data.rename(columns={"Date": "datetime"}, inplace=True)
         data["Date"] = data.apply(lambda raw: raw["datetime"].date(), axis=1)
 
-        data = data[["Date", 'Open', 'High', 'Low','Close', 'Adj Close', 'Volume']]
+        data = data[['Date', 'Open', 'High', 'Low','Close', 'Adj Close', 'Volume', 'datetime']]
         data['Return'] = data['Close'].pct_change(periods=1).fillna(0)
 
         log_returns = np.log(data.Close/data.Close.shift(1)).fillna(0)

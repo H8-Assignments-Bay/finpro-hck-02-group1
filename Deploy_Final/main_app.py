@@ -71,21 +71,26 @@ with tab1:
         negative_sentiment = st.number_input('Negative Sentiment',0,10000)
     with col3:
         neutral_sentiment = st.number_input('Neutral Sentiment',0,10000)
-    
+
     open_price = df['Open'].tail(1).values
     high_price = df['High'].tail(1).values
     volume_shares = df['Volume'].tail(1).values
     close_price = df['Close'].tail(1).values
     low_price = df['Low'].tail(1).values
+    date_now = pd.to_datetime(df['datetime']).dt.strftime('%Y-%m-%d').tail(1).values
     
     df_predict = pd.DataFrame({'Open': [open_price], 'High': [high_price], 
                         'Low': [low_price], 'Close': [close_price], 
                         'Volume': [volume_shares], 'pos': [positive_sentiment], 
-                        'neg': [negative_sentiment], 'neutral': [neutral_sentiment]})
-    submit = st.button('Predict')
-    if submit:
+                        'neg': [negative_sentiment], 'neutral': [neutral_sentiment]}, index=date_now)
+
+    submit_2 = st.button('Predict')
+    if submit_2:
         model_linreg = pickle.load(open('./preprocess.pkl', 'rb'))
         pred = float(np.round(model_linreg.predict(df_predict), 3))
+        
+        st.write("Today")
+        st.write(df_predict)
         
         st.write(f"Tomorrow Close Price $ {pred}")
 
